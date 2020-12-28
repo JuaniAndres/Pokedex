@@ -44,6 +44,20 @@ const love = svg_2.append("path").attr("d", "M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7
     .attr("fill", "transparent")
     .attr("transform", "translate(350,380) scale(1.5,1.5)")
     .attr("stroke", "transparent")
+const afinity_box = svg_2.append("rect")
+    .attr("x",410)
+    .attr("y",390)
+    .attr("width",90)
+    .attr("height",20)
+    .attr("fill","transparent")
+    .attr("stroke","transparent")
+    .attr("stroke-width",1)
+const afinity_group_text = svg_2.append("text")
+    .attr("x",414)
+    .attr("y",405)
+    .attr("fill","transparent")
+    .attr("font-size","15")
+    .text("")
 
 //legend corazon
 svg_2.append("path").attr("d", "M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2\n" +
@@ -807,7 +821,7 @@ function select(d, selected) {
     pokedex.select(`[id="${d.id}"]`)
         .attr("class", "card selected")
     if (selected.length === 2) {
-        show_heart()
+        check_heart()
     }
 }
 
@@ -826,23 +840,23 @@ function marcar_selected(selected) {
     }
 }
 
-function show_heart() {
+function check_heart() {
     pokemon1 = selected[0]
     pokemon2 = selected[1]
     if (pokemon1.name === "Ditto" && pokemon2.egg_type_1 !== "Undiscovered") {
-        love.transition().delay(1000).duration(500).attr("stroke", "black").attr("fill", "red")
+        show_heart("Ditto")
     } else if (pokemon2.name === "Ditto" && pokemon1.egg_type_1 !== "Undiscovered") {
-        love.transition().attr("stroke", "black").attr("fill", "red")
+        show_heart("Ditto")
     } else if (pokemon1.egg_type_1 === "Undiscovered" || pokemon2.egg_type1 === "Undiscovered") {
         //No breed
     } else if (pokemon1.egg_type_1 === pokemon2.egg_type_1 && pokemon1.egg_type_1 !== "") {
-        love.transition().delay(1000).duration(500).attr("stroke", "black").attr("fill", "red")
+        show_heart(pokemon1.egg_type_1)
     } else if (pokemon1.egg_type_2 === pokemon2.egg_type_1 && pokemon1.egg_type_2 !== "") {
-        love.transition().delay(1000).duration(500).attr("stroke", "black").attr("fill", "red")
+        show_heart(pokemon1.egg_type_2)
     } else if (pokemon1.egg_type_1 === pokemon2.egg_type_2 && pokemon1.egg_type_1 !== "") {
-        love.transition().delay(1000).duration(500).attr("stroke", "black").attr("fill", "red")
+        show_heart(pokemon1.egg_type_1)
     } else if (pokemon1.egg_type_2 === pokemon2.egg_type_2 && pokemon1.egg_type_2 !== "") {
-        love.transition().delay(1000).duration(500).attr("stroke", "black").attr("fill", "red")
+        show_heart(pokemon1.egg_type_2)
     } else {
                 //No breed
 }}
@@ -852,6 +866,32 @@ function hide_heart() {
         .duration(500)
         .attr("stroke", "transparent")
         .attr("fill", "transparent")
+    afinity_box.transition()
+        .duration(500)
+        .attr("fill","transparent")
+        .attr("stroke","transparent")
+    afinity_group_text.transition()
+        .duration(500)
+        .attr("fill","transparent")
+        .selection()
+        .text("")
+}
+function show_heart(family){
+    love.transition()
+        .delay(1000)
+        .duration(500)
+        .attr("stroke", "black")
+        .attr("fill", "red")
+    afinity_box.transition()
+        .delay(1000)
+        .duration(500)
+        .attr("stroke","black")
+        .attr("fill","white")
+    afinity_group_text.transition()
+        .delay(1400)
+        .duration(500)
+        .attr("fill","black")
+        .text(family)
 }
 
 function type_2_url(d) {
