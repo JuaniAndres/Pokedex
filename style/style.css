@@ -1,0 +1,97 @@
+.container {
+    margin: auto;
+    width: 80%;
+    text-align: justify;
+    font-family: sans-serif;
+}
+
+body {
+    background: #deeaee;
+    margin: 0;
+}
+
+#vis {
+    display: inline-flex;
+    border: 1px solid black;
+    background: snow;
+}
+
+.sidenav {
+    height: 670px; /* Full-height: remove this if you want "auto" height */
+    width: 560px; /* Set the width of the sidebar */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    padding-top: 145px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    overflow-y: hidden;
+    float: left;
+    background-image: url("../img/pokedex.png");
+    background-size: 560px 800px;
+    background-repeat: no-repeat;
+    border-radius: 50px;
+}
+
+.right_content {
+    margin-left: 560px; /* Same as the width of the sidebar */
+    padding: 0px 10px;
+
+}
+
+.plot {
+    border: 1px solid black;
+    background: snow;
+}
+
+.card {
+    display: inline-flex;
+    border: 1px solid black;
+    background-color: snow;
+}
+.selected{
+    background-color: #fffdd0;
+    font-weight: bold;
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    height: 635px;
+    padding-left: 20px;
+}
+
+.flex-container > div {
+    width: 125px;
+    text-align: center;
+    line-height: 75px;
+    font-size: 30px;
+}
+.center{
+    margin-left: 25%;
+}
+.top_text{
+    font-family: sans-serif;
+    background-color: black;
+    color: white;
+    margin: 0;
+    padding: 5px;
+    margin-bottom: 50px;
+}
+#vis1{
+    margin-left: 150px;
+    margin-bottom: 80px;
+}
+.center_img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    margin-bottom: 50px;
+}
+.credits{
+    text-align: center;
+    font-family: sans-serif;
+}
