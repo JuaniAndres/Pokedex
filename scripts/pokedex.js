@@ -48,27 +48,15 @@ const love = svg_2.append("path").attr("d", "M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7
 //legend corazon
 svg_2.append("path").attr("d", "M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2\n" +
     "  c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z")
-    .attr("fill", "white")
-    .attr("transform", `translate(170,${height2 - 25}) scale(0.75,0.75)`)
-    .attr("stroke", "black")
-
-svg_2.append("text")
-    .attr("stroke", "black")
-    .attr("x", 200)
-    .attr("y", height2 - 10)
-    .text("Can't breed")
-
-svg_2.append("path").attr("d", "M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2\n" +
-    "  c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z")
     .attr("fill", "red")
-    .attr("transform", `translate(350,${height2 - 25}) scale(0.75,0.75)`)
+    .attr("transform", `translate(300,${height2 - 25}) scale(0.75,0.75)`)
     .attr("stroke", "black")
 
 svg_2.append("text")
     .attr("stroke", "black")
-    .attr("x", 380)
+    .attr("x", 325)
     .attr("y", height2 - 10)
-    .text("Can breed")
+    .text(": Means can breed")
 
 const contenedorEjeY = svg_1
     .append("g")
@@ -367,7 +355,7 @@ function actualizar_detalle_pokemon(datos) {
                     .attr("height", c_height)
                     .attr("x", 50)
                     .attr("y", (_, i) => 50 + pokemon_card_separation * i)
-                    .attr("fill", "#fffdd0")
+                    .attr("fill", "white")
                     .attr("stroke", "black")
                     .transition()
                     .duration(1500)
@@ -475,18 +463,20 @@ function actualizar_detalle_pokemon(datos) {
                     .attr("font-size", 18)
                     .selection()
 
-                g.append("circle")
+                g.append("circle") // polygon circle
                     .attr("cx", cx + pokemon_circ_sep)
                     .attr("cy", (_, i) => cy + pokemon_card_separation * i)
-                    .attr("r", 0)
-                    .attr("fill", "snow")
-                    .transition()
-                    .delay(600)
-                    .duration(1500)
                     .attr("r", card_circle_radius)
+                    .attr("fill", "transparent")
+                    .attr("stroke","transparent")
+                    .transition()
+                    .delay(700)
+                    .duration(1500)
+                    .attr("stroke", "black")
+                    .attr("fill", "snow")
                     .selection()
 
-                g.append("polygon")
+                g.append("polygon") //stats polygon outter
                     .attr("points", (_, i) => `${570 + pokemon_circ_sep},${131 + pokemon_card_separation * i} ${490 + pokemon_circ_sep},${131 + pokemon_card_separation * i} ${450 + pokemon_circ_sep},${200 + pokemon_card_separation * i} ${490 + pokemon_circ_sep},${269 + pokemon_card_separation * i} ${570 + pokemon_circ_sep},${269 + pokemon_card_separation * i} ${610 + pokemon_circ_sep},${200 + pokemon_card_separation * i}`) //https://www.mathopenref.com/coordpolycalc.html
                     .attr("fill", "transparent")
                     .attr("stroke", "transparent")
@@ -497,7 +487,7 @@ function actualizar_detalle_pokemon(datos) {
                     .attr("stroke", "black")
                     .selection()
 
-                g.append("polygon")
+                g.append("polygon") //stats polygon inner
                     .attr("points", (d, i) => calcular_cordenada_poligono(
                         Scale(d.sp_attack), Scale(d.hp), Scale(d.attack), Scale(d.defense), Scale(d.speed), Scale(d.sp_defense),
                         cx + pokemon_circ_sep, cy + pokemon_card_separation * i))
@@ -508,7 +498,7 @@ function actualizar_detalle_pokemon(datos) {
                     .attr("fill", "blue")
                     .selection()
 
-                g.append("line")
+                g.append("line") //polygon division line
                     .attr("x1", 570 + pokemon_circ_sep)
                     .attr("y1", (_, i) => 131 + pokemon_card_separation * i)
                     .attr("x2", 490 + pokemon_circ_sep)
@@ -520,7 +510,7 @@ function actualizar_detalle_pokemon(datos) {
                     .duration(1500)
                     .attr("stroke", "black")
                     .selection()
-                g.append("line")
+                g.append("line") //polygon division line
                     .attr("x1", 490 + pokemon_circ_sep)
                     .attr("y1", (_, i) => 131 + pokemon_card_separation * i)
                     .attr("x2", 570 + pokemon_circ_sep)
@@ -532,7 +522,7 @@ function actualizar_detalle_pokemon(datos) {
                     .duration(1500)
                     .attr("stroke", "black")
                     .selection()
-                g.append("line")
+                g.append("line") //polygon division line
                     .attr("x1", 450 + pokemon_circ_sep)
                     .attr("y1", (_, i) => 200 + pokemon_card_separation * i)
                     .attr("x2", 610 + pokemon_circ_sep)
@@ -545,9 +535,9 @@ function actualizar_detalle_pokemon(datos) {
                     .attr("stroke", "black")
                     .selection()
 
-                g.append("text")
+                g.append("text") //Hp text
                     .attr("x", 570 + 3 + pokemon_circ_sep)
-                    .attr("y", (_, i) => 131 - 3 + pokemon_card_separation * i)
+                    .attr("y", (_, i) => 121 - 3 + pokemon_card_separation * i)
                     .attr("fill", "black")
                     .text("HP")
                     .attr("font-size", 0)
@@ -556,9 +546,21 @@ function actualizar_detalle_pokemon(datos) {
                     .duration(1500)
                     .attr("font-size", 10)
                     .selection()
-                g.append("text")
+                g.append("text") //Hp value
+                    .attr("x", 570 + 3 + pokemon_circ_sep)
+                    .attr("y", (_, i) => 131 - 3 + pokemon_card_separation * i)
+                    .attr("fill", "black")
+                    .text(d => d.hp)
+                    .attr("font-size", 0)
+                    .transition()
+                    .delay(600)
+                    .duration(1500)
+                    .attr("font-size", 10)
+                    .selection()
+
+                g.append("text") //Atack text
                     .attr("x", 490 - 16 + pokemon_circ_sep)
-                    .attr("y", (_, i) => 131 - 4 + pokemon_card_separation * i)
+                    .attr("y", (_, i) => 121 - 4 + pokemon_card_separation * i)
                     .attr("fill", "black")
                     .text("Attack")
                     .attr("font-size", 0)
@@ -567,9 +569,21 @@ function actualizar_detalle_pokemon(datos) {
                     .duration(1500)
                     .attr("font-size", 10)
                     .selection()
-                g.append("text")
+                g.append("text") //Atack value
+                    .attr("x", 490 - 10 + pokemon_circ_sep)
+                    .attr("y", (_, i) => 131 - 4 + pokemon_card_separation * i)
+                    .attr("fill", "black")
+                    .text(d => d.attack)
+                    .attr("font-size", 0)
+                    .transition()
+                    .delay(600)
+                    .duration(1500)
+                    .attr("font-size", 10)
+                    .selection()
+
+                g.append("text") // Defense text
                     .attr("x", 450 - 35 + pokemon_circ_sep)
-                    .attr("y", (_, i) => 200 + 3 + pokemon_card_separation * i)
+                    .attr("y", (_, i) => 190 + 3 + pokemon_card_separation * i)
                     .attr("fill", "black")
                     .text("Defense")
                     .attr("font-size", 0)
@@ -578,9 +592,21 @@ function actualizar_detalle_pokemon(datos) {
                     .duration(1500)
                     .attr("font-size", 10)
                     .selection()
-                g.append("text")
+                g.append("text") // Defense value
+                    .attr("x", 450 - 12 + pokemon_circ_sep)
+                    .attr("y", (_, i) => 200 + 3 + pokemon_card_separation * i)
+                    .attr("fill", "black")
+                    .text(d => d.defense)
+                    .attr("font-size", 0)
+                    .transition()
+                    .delay(600)
+                    .duration(1500)
+                    .attr("font-size", 10)
+                    .selection()
+
+                g.append("text") //Speed text
                     .attr("x", 490 - 15 + pokemon_circ_sep)
-                    .attr("y", (_, i) => 269 + 10 + pokemon_card_separation * i)
+                    .attr("y", (_, i) => 279 + 10 + pokemon_card_separation * i)
                     .attr("fill", "black")
                     .text("Speed")
                     .attr("font-size", 0)
@@ -589,9 +615,21 @@ function actualizar_detalle_pokemon(datos) {
                     .duration(1500)
                     .attr("font-size", 10)
                     .selection()
-                g.append("text")
-                    .attr("x", 570 - 4 + pokemon_circ_sep)
+                g.append("text") //Speed value
+                    .attr("x", 490 - 8 + pokemon_circ_sep)
                     .attr("y", (_, i) => 269 + 10 + pokemon_card_separation * i)
+                    .attr("fill", "black")
+                    .text(d => d.speed)
+                    .attr("font-size", 0)
+                    .transition()
+                    .delay(600)
+                    .duration(1500)
+                    .attr("font-size", 10)
+                    .selection()
+
+                g.append("text") // sp def text
+                    .attr("x", 570 - 4 + pokemon_circ_sep)
+                    .attr("y", (_, i) => 279 + 10 + pokemon_card_separation * i)
                     .attr("fill", "black")
                     .text("SP.Def")
                     .attr("font-size", 0)
@@ -600,9 +638,21 @@ function actualizar_detalle_pokemon(datos) {
                     .duration(1500)
                     .attr("font-size", 10)
                     .selection()
-                g.append("text")
+                g.append("text") // sp def value
+                    .attr("x", 570 - 2 + pokemon_circ_sep)
+                    .attr("y", (_, i) => 269 + 10 + pokemon_card_separation * i)
+                    .attr("fill", "black")
+                    .text(d => d.sp_defense)
+                    .attr("font-size", 0)
+                    .transition()
+                    .delay(600)
+                    .duration(1500)
+                    .attr("font-size", 10)
+                    .selection()
+
+                g.append("text") // sp atack text
                     .attr("x", 610 + 2 + pokemon_circ_sep)
-                    .attr("y", (_, i) => 200 + 2 + pokemon_card_separation * i)
+                    .attr("y", (_, i) => 190 + 2 + pokemon_card_separation * i)
                     .attr("fill", "black")
                     .text("Sp. Atk")
                     .attr("font-size", 0)
@@ -611,8 +661,19 @@ function actualizar_detalle_pokemon(datos) {
                     .duration(1500)
                     .attr("font-size", 10)
                     .selection()
+                g.append("text") // sp atack value
+                    .attr("x", 610 + 2 + pokemon_circ_sep)
+                    .attr("y", (_, i) => 200 + 3 + pokemon_card_separation * i)
+                    .attr("fill", "black")
+                    .text(d => d.sp_attack)
+                    .attr("font-size", 0)
+                    .transition()
+                    .delay(600)
+                    .duration(1500)
+                    .attr("font-size", 10)
+                    .selection()
 
-                g.append("text")
+                g.append("text") // Total stat points text
                     .attr("x", cx + pokemon_circ_sep)
                     .attr("y", (_, i) => cy - card_circle_radius + 25 + pokemon_card_separation * i)
                     .attr("fill", "black")
@@ -773,7 +834,7 @@ function show_heart() {
     } else if (pokemon2.name === "Ditto" && pokemon1.egg_type_1 !== "Undiscovered") {
         love.transition().attr("stroke", "black").attr("fill", "red")
     } else if (pokemon1.egg_type_1 === "Undiscovered" || pokemon2.egg_type1 === "Undiscovered") {
-        love.transition().delay(1000).duration(500).attr("stroke", "black").attr("fill", "white")
+        //No breed
     } else if (pokemon1.egg_type_1 === pokemon2.egg_type_1 && pokemon1.egg_type_1 !== "") {
         love.transition().delay(1000).duration(500).attr("stroke", "black").attr("fill", "red")
     } else if (pokemon1.egg_type_2 === pokemon2.egg_type_1 && pokemon1.egg_type_2 !== "") {
@@ -783,9 +844,8 @@ function show_heart() {
     } else if (pokemon1.egg_type_2 === pokemon2.egg_type_2 && pokemon1.egg_type_2 !== "") {
         love.transition().delay(1000).duration(500).attr("stroke", "black").attr("fill", "red")
     } else {
-        love.transition().delay(1000).duration(500).attr("stroke", "black").attr("fill", "white")
-    }
-}
+                //No breed
+}}
 
 function hide_heart() {
     love.transition()
